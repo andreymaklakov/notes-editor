@@ -2,18 +2,14 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch } from "./store/createStore";
-import { getAllNotes, getAllTags, getIsEdit, loadNotes } from "./store/notes";
+import { getIsEdit, loadNotes } from "./store/notes";
 
 import CreateNote from "./components/createNote";
 import NotesList from "./components/notesList";
 import SearchForm from "./components/searchForm";
 
-import { Note } from "../types";
-
 function App() {
   const isEdit: boolean = useSelector(getIsEdit());
-  const allNotes: Note[] = useSelector(getAllNotes());
-  const allTags: string[] = useSelector(getAllTags());
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -21,9 +17,10 @@ function App() {
     dispatch(loadNotes());
   }, [dispatch]);
 
-  if (allNotes.length && allTags.length) {
-    console.log("hi");
+  const myNotes = localStorage.getItem("notes");
+  const myTags = localStorage.getItem("tags");
 
+  if (myNotes && myTags) {
     return (
       <div className="app">
         <CreateNote />
