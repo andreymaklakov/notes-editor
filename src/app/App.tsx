@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch } from "./store/createStore";
@@ -9,16 +9,22 @@ import NotesList from "./components/notesList";
 import SearchForm from "./components/searchForm";
 
 function App() {
+  const [myNotes, setMyNotes] = useState<string | null>();
+  const [myTags, setMyTags] = useState<string | null>();
+
   const isEdit: boolean = useSelector(getIsEdit());
 
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadNotes());
-  }, [dispatch]);
 
-  const myNotes = localStorage.getItem("notes");
-  const myTags = localStorage.getItem("tags");
+    const myNotes = localStorage.getItem("notes");
+    const myTags = localStorage.getItem("tags");
+
+    setMyNotes(myNotes);
+    setMyTags(myTags);
+  }, [dispatch]);
 
   if (myNotes && myTags) {
     return (
