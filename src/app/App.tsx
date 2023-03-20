@@ -22,6 +22,8 @@ function App() {
   }, [dispatch]);
 
   if (allNotes.length && allTags.length) {
+    console.log("hi");
+
     return (
       <div className="app">
         <CreateNote />
