@@ -84,7 +84,7 @@ const notesSlice = createSlice({
               if (word.includes("#")) {
                 word = word.slice(1);
 
-                const newTag = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+                const newTag = word.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
                 console.log(newTag);
 
                 state.allTags = [...state.allTags, newTag];
